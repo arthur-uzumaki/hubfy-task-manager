@@ -85,6 +85,7 @@ A estrutura de arquivos da API segue uma abordagem de Domínio-Serviço, separan
     ```
 
 O servidor da API estará rodando em `http://localhost:3333`.
+O doc swagger da API estará rodando em `http://localhost:3333/docs`.
 
 ### Executando os Testes
 
