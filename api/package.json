@@ -1,0 +1,50 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --env-file=.env --watch src/http/server.ts",
+    "db:seed": "node --env-file=.env  src/http/db/seed.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "dotenv -e .env drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "pretest:e2e": "dotenv -e .env-test drizzle-kit migrate",
+    "test:e2e": " vitest run --coverage --config  vitest.config.e2e.ts",
+    "test:unit": "vitest run --coverage"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1",
+  "devDependencies": {
+    "@biomejs/biome": "2.3.8",
+    "@faker-js/faker": "^10.1.0",
+    "@types/bcrypt": "^6.0.0",
+    "@types/node": "^25.0.1",
+    "@types/supertest": "^6.0.3",
+    "@vitest/coverage-v8": "^4.0.15",
+    "dotenv": "^17.2.3",
+    "dotenv-cli": "^11.0.0",
+    "drizzle-kit": "^0.31.8",
+    "supertest": "^7.1.4",
+    "typescript": "^5.9.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^4.0.15"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/swagger": "^9.6.1",
+    "@scalar/fastify-api-reference": "^1.40.5",
+    "bcrypt": "^6.0.0",
+    "drizzle-orm": "^0.45.1",
+    "fastify": "^5.6.2",
+    "fastify-pino-pretty": "^5.2.0",
+    "fastify-plugin": "^5.1.0",
+    "fastify-type-provider-zod": "^6.1.0",
+    "mysql2": "^3.15.3",
+    "zod": "^4.1.13"
+  }
+}
