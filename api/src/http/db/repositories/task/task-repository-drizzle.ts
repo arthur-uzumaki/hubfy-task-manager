@@ -1,4 +1,4 @@
-import { and, eq } from 'drizzle-orm'
+import { and, count, eq, sql } from 'drizzle-orm'
 import type { Task } from '../../../../domain/entities/task.ts'
 import type { TaskRepository } from '../../../../domain/repositories/task/task-repository.ts'
 import { db } from '../../connection.ts'
@@ -85,5 +85,17 @@ export class TaskRepositoryDrizzle implements TaskRepository {
     const task = TaskMapper.toDomain(result[0])
 
     return task
+  }
+  async countByUserId(userId: string): Promise<number> {
+    const result = await db
+      .select({
+        count: sql<number>`count(*)`.mapWith(Number),
+      })
+      .from(schema.task)
+      .where(eq(schema.task.userId, userId))
+
+    const count = result[0].count
+
+    return count
   }
 }
