@@ -15,6 +15,7 @@ import { createTaskRoute } from './routes/task/create-task.ts'
 import { deleteTaskRoute } from './routes/task/delete-task.ts'
 import { findAllTasksRoute } from './routes/task/find-all-tasks.ts'
 import { findTaskRoute } from './routes/task/find-task.ts'
+import { findUserTasksCountsRoute } from './routes/task/find-user-tasks-count.ts'
 import { updateTaskRoute } from './routes/task/update-task.ts'
 import { updateTaskStatusRoute } from './routes/task/update-task-status.ts'
 import { authenticateUserRoute } from './routes/user/authenticate-user.ts'
@@ -86,3 +87,4 @@ app.register(updateTaskRoute)
 app.register(findTaskRoute)
 app.register(findAllTasksRoute)
 app.register(updateTaskStatusRoute)
+app.register(findUserTasksCountsRoute)
