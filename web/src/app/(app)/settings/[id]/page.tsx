@@ -1,4 +1,11 @@
-import { AlertTriangle, ArrowLeft, Calendar, Mail, User } from 'lucide-react'
+import {
+  AlertTriangle,
+  ArrowLeft,
+  Calendar,
+  CheckSquare,
+  Mail,
+  User,
+} from 'lucide-react'
 import type { Metadata } from 'next'
 import { updateTag } from 'next/cache'
 import Link from 'next/link'
@@ -15,6 +22,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { deleteCount } from '@/http/delete-count'
+import { getUserTasksCount } from '@/http/get-user-tasks-count'
 import { formatDate } from '@/utils/format-date'
 import { DeleteCount } from './delete-count'
 
@@ -24,6 +32,7 @@ export const metadata: Metadata = {
 
 export default async function SettingsPage() {
   const { user } = await auth()
+  const { count } = await getUserTasksCount()
 
   async function handleDeleteAccount() {
     'use server'
@@ -81,39 +90,39 @@ export default async function SettingsPage() {
               </div>
             </div>
 
-            <div className="space-y-4 border-border border-t pt-6">
-              <div className="flex items-center gap-3">
-                <User className="h-5 w-5 text-muted-foreground" />
-                <div className="flex-1">
-                  <p className="font-medium text-muted-foreground text-sm">
-                    Nome
-                  </p>
-                  <p className="text-base text-foreground">{user.name}</p>
+              <div className="space-y-4 border-t border-border pt-6">
+                <div className="flex items-center gap-3">
+                  <User className="h-5 w-5 text-muted-foreground" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-muted-foreground">Nome</p>
+                    <p className="text-base text-foreground">{user.name}</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-muted-foreground" />
-                <div className="flex-1">
-                  <p className="font-medium text-muted-foreground text-sm">
-                    Email
-                  </p>
-                  <p className="text-base text-foreground">{user.email}</p>
+                <div className="flex items-center gap-3">
+                  <Mail className="h-5 w-5 text-muted-foreground" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-muted-foreground">Email</p>
+                    <p className="text-base text-foreground">{user.email}</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-3">
-                <Calendar className="h-5 w-5 text-muted-foreground" />
-                <div className="flex-1">
-                  <p className="font-medium text-muted-foreground text-sm">
-                    Membro desde
-                  </p>
-                  <p className="text-base text-foreground">
-                    {formatDate(user.createdAt)}
-                  </p>
+                <div className="flex items-center gap-3">
+                  <Calendar className="h-5 w-5 text-muted-foreground" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-muted-foreground">Membro desde</p>
+                    <p className="text-base text-foreground">{formatDate(user.createdAt)}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <CheckSquare className="h-5 w-5 text-muted-foreground" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-muted-foreground">Tarefas Criadas</p>
+                    <p className="text-base text-foreground">{count === 0 ? "Nenhuma tarefa criada": count}</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
             <div className="flex justify-end border-border border-t pt-6">
               <Button asChild>
