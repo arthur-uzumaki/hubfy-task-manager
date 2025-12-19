@@ -47,4 +47,8 @@ export class InMemoryTaskRepository implements TaskRepository {
   async findBySlug(slug: string): Promise<Task | null> {
     return this.tasks.find(t => t.slug.value === slug) || null
   }
+
+  async countByUserId(userId: string): Promise<number> {
+    return this.tasks.filter(task => task.userId === userId).length
+  }
 }

@@ -7,4 +7,5 @@ export abstract class TaskRepository {
   abstract save(task: Task): Promise<void>
   abstract delete(slug: string, userId: string): Promise<boolean>
   abstract findBySlug(slug: string): Promise<Task | null>
+  abstract countByUserId(userId: string): Promise<number>
 }
